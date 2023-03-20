@@ -13,8 +13,7 @@ namespace Entities.Concrete
         public int ModelId { get; set; }
         public string Km { get; set; }
         public int Price { get; set; }
-        public string year { get; set; }
-        public string Image { get; set; }
+        public string Year { get; set; }
         public string Description { get; set; }
 
     }
