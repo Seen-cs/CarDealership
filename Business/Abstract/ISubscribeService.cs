@@ -10,5 +10,6 @@ namespace Business.Abstract
     {
         IResult Add(Subscribe subscribe);
         IResult Update(Subscribe subscribe);
+        IDataResult<List<Subscribe>> GetAll();
     }
 }

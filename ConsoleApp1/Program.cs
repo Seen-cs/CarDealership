@@ -16,7 +16,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            IAuthService authService;
+            
             EfCarDal carDal = new EfCarDal();
             foreach (var item in carDal.GetAll())
             {
@@ -24,14 +24,32 @@ namespace ConsoleApp1
             }
             UserForRegisterDto user = new UserForRegisterDto();
 
-           // authService.Register(user, user.Password);
+            // authService.Register(user, user.Password);
             //AuthManager authManager =new AuthManager(new UserManager(new EfUserDal),new JwtHelper(IConfiguration))
-            
-            UserCar userCar = new UserCar();
-            userCar.CarId = 1;
-            userCar.Stock = 100;
-            userCar.UserId = 1;
-          //  userCarManager.Add(userCar);
+
+
+            //  userCarManager.Add(userCar);
+
+            //mail servisi denemesi
+
+            ICarService CarService = new CarManager(new EfCarDal(), new SubscribeManager(new EfSubscribeDal()),new UserManager((new EfUserDal())));
+
+
+            CarService.Add(new Car
+            {
+                BrandId = 1,
+                ColorId = 2,
+                Km = "20000",
+                Price = 80100,
+                ModelId = 1,
+                UserId = 1,
+                Year = "2018",
+                Description = "Egea"
+
+            });
+
+
+
         }
     }
 }

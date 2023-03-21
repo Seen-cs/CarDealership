@@ -23,6 +23,11 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<List<Subscribe>> GetAll()
+        {
+            return new SuccessDataResult<List<Subscribe>>(_subscribeDal.GetAll());
+        }
+
         public IResult Update(Subscribe subscribe)
         {
             _subscribeDal.Update(subscribe);
