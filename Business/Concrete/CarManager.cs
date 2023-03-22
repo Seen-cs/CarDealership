@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -99,6 +100,8 @@ namespace Business.Concrete
                             smtp.Credentials = new NetworkCredential("seenbilgi@outlook.com", "123456789seen");
                             smtp.EnableSsl = true;
                             smtp.Send(mail);
+                            Task.Delay(5000);
+
                         }
                     }
                 }
