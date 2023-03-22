@@ -25,8 +25,8 @@ namespace Business.Concrete
             _subscribeService = subscribeService;
             _userService = userService;
         }
-       // [SecuredOperation("admin")]
         
+        [SecuredOperation("Seller")]
         public IResult Add(Car car)
         {
 
@@ -95,10 +95,10 @@ namespace Business.Concrete
                         mail.From = new MailAddress("seenbilgi@outlook.com");
                         mail.To.Add(user.Email);
                         mail.Subject = $"{user.FirstName} Adlı kullanıcı yeni bir araba ekledi.";
-                        mail.Body = $"{car.Km} {car.Year} {car.Description} Sadece {car.Price} TL";
+                        mail.Body = $"{car.Km} Km {car.Year} {car.Description} Sadece {car.Price} TL";
                         mail.IsBodyHtml = true;
 
-                        using (SmtpClient smtp = new SmtpClient("smtp-mail.outlook.com", 587))
+                        using (SmtpClient smtp = new SmtpClient("smtp.office365.com", 587))
                         {
                             smtp.Credentials = new NetworkCredential("seenbilgi@outlook.com", "123456789seen");
                             smtp.EnableSsl = true;
