@@ -38,5 +38,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
         }
+
+        public int GetUserById(string userName)
+        {
+            return _userDal.Get(p => p.FirstName == userName).Id;
+        }
     }
 }

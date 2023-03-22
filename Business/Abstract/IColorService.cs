@@ -10,5 +10,7 @@ namespace Business.Abstract
     {
         IResult Add(Color color);
         IResult Update(Color color);
+        int GetColorById(string colorName);
+
     }
 }

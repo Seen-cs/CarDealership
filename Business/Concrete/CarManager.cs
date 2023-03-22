@@ -3,6 +3,7 @@ using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -24,6 +25,7 @@ namespace Business.Concrete
         }
         public IResult Add(Car car)
         {
+
             _carDal.Add(car);
             SendMail(car);
 
@@ -32,9 +34,9 @@ namespace Business.Concrete
 
         
 
-        public IDataResult<List<Car>> GetAll()
+        public IDataResult<List<CarDetailDto>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetClaims());
         }
 
         public IDataResult<List<Car>> GetByColorId(int colorId)

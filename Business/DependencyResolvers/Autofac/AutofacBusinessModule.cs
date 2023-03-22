@@ -20,8 +20,23 @@ namespace Business.DependencyResolvers.Autofac
         {
             //Biri IProductService isterse ona ProductManager new le ver.
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
-            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance(); 
-            
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+
+            builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
+            builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
+
+            builder.RegisterType<SubscribeManager>().As<ISubscribeService>().SingleInstance();
+            builder.RegisterType<EfSubscribeDal>().As<ISubscribeDal>().SingleInstance();
+
+            builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();
+            builder.RegisterType<EfBrandDal>().As<IBrandDal>().SingleInstance();
+
+            builder.RegisterType<ColorManager>().As<IColorService>().SingleInstance();
+            builder.RegisterType<EfColorDal>().As<IColorDal>().SingleInstance();
+
+            builder.RegisterType<ModelManager>().As<IModelService>().SingleInstance();
+            builder.RegisterType<EfModelDal>().As<IModelDal>().SingleInstance();
+
             //builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             //builder.RegisterType<EFCategoryDal>().As<ICategoryDal>().SingleInstance();
 

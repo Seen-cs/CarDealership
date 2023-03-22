@@ -22,6 +22,12 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public int GetColorById(string colorName)
+        {
+            return _colorDal.Get(p => p.Name == colorName).Id;
+
+        }
+
         public IResult Update(Color color)
         {
             _colorDal.Update(color);

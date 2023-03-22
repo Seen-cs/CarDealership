@@ -49,7 +49,7 @@ namespace Business.Concrete
 
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
             {
-                return new ErrorDataResult<User>();
+                return new ErrorDataResult<User>("yanlış");
             }
 
             return new SuccessDataResult<User>(userToCheck);
