@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -24,11 +25,13 @@ namespace Business.Concrete
             _subscribeService = subscribeService;
             _userService = userService;
         }
+        [SecuredOperation("admin")]
+        
         public IResult Add(Car car)
         {
 
             _carDal.Add(car);
-            SendMail(car);
+            //SendMail(car);
 
             return new SuccessResult();
         }
