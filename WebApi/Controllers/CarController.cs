@@ -1,11 +1,14 @@
 ﻿using Business.Abstract;
+using Core.Utilities.IoC;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace WebApi.Controllers
@@ -19,6 +22,7 @@ namespace WebApi.Controllers
         IColorService color;
         IModelService model;
         IUserService user;
+        private IHttpContextAccessor _httpContextAccessor;
         public CarController(ICarService carService, IBrandService brandService,IColorService colorService,IModelService modelService,IUserService userService)
         {
             _carService = carService;
@@ -26,6 +30,7 @@ namespace WebApi.Controllers
             color = colorService;
             model = modelService;
             user = userService;
+            _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
         [HttpGet("getall")]
         public IActionResult GetAll()
@@ -39,22 +44,22 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult add(CarDetailDto carDetailDto)
+        public IActionResult Add(CarDetailDto carDetailDto)
         {
-            var brand = _brandService.GetBrandById(carDetailDto.brand);
-            var modelId = model.GetModelById(carDetailDto.model);
-            var colorId = color.GetColorById(carDetailDto.color);
-            var userId = user.GetUserById(carDetailDto.userName);
+            var brand = _brandService.GetBrandById(carDetailDto.Brand);
+            var modelId = model.GetModelById(carDetailDto.Model);
+            var colorId = color.GetColorById(carDetailDto.Color);
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Car car = new Car
             {
                 BrandId=brand,
                 ColorId=colorId,
-                Description=carDetailDto.description,
-                Km=carDetailDto.km,
+                Description=carDetailDto.Description,
+                Km=carDetailDto.Km,
                 ModelId=modelId,
-                Price=carDetailDto.price,
-                UserId=userId,
-                Year=carDetailDto.year
+                Price=carDetailDto.Price,
+                UserId=Convert.ToInt16(userId),
+                Year=carDetailDto.Year
             };
             var result = _carService.Add(car);
             if (result.Success)
