@@ -32,21 +32,21 @@ namespace ConsoleApp1
 
             //mail servisi denemesi
 
-            ICarService CarService = new CarManager(new EfCarDal(), new SubscribeManager(new EfSubscribeDal()),new UserManager((new EfUserDal())));
+            //ICarService CarService = new CarManager(new EfCarDal(), new SubscribeManager(new EfSubscribeDal()),new UserManager((new EfUserDal())));
 
 
-            CarService.Add(new Car
-            {
-                BrandId = 1,
-                ColorId = 2,
-                Km = "20000",
-                Price = 80100,
-                ModelId = 1,
-                UserId = 1,
-                Year = "2018",
-                Description = "Egea"
+            //CarService.Add(new Car
+            //{
+            //    BrandId = 1,
+            //    ColorId = 2,
+            //    Km = "20000",
+            //    Price = 80100,
+            //    ModelId = 1,
+            //    UserId = 1,
+            //    Year = "2018",
+            //    Description = "Egea"
 
-            });
+            //});
 
 
 

@@ -19,17 +19,16 @@ namespace WebApi.Controllers
     {
         ICarService _carService;
         IBrandService _brandService;
-        IColorService color;
-        IModelService model;
-        IUserService user;
+        IColorService _colorService;
+        IModelService _modelService;
         private IHttpContextAccessor _httpContextAccessor;
-        public CarController(ICarService carService, IBrandService brandService,IColorService colorService,IModelService modelService,IUserService userService)
+        public CarController(ICarService carService, IBrandService brandService,IColorService colorService,IModelService modelService)
         {
             _carService = carService;
             _brandService = brandService;
-            color = colorService;
-            model = modelService;
-            user = userService;
+            _colorService = colorService;
+            _modelService = modelService;
+   
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
         [HttpGet("getall")]
@@ -47,8 +46,8 @@ namespace WebApi.Controllers
         public IActionResult Add(CarDetailDto carDetailDto)
         {
             var brand = _brandService.GetBrandById(carDetailDto.Brand);
-            var modelId = model.GetModelById(carDetailDto.Model);
-            var colorId = color.GetColorById(carDetailDto.Color);
+            var modelId = _modelService.GetModelById(carDetailDto.Model);
+            var colorId = _colorService.GetColorById(carDetailDto.Color);
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Car car = new Car
             {

@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.EntityFramework;
 using Entities.Concrete;
@@ -10,6 +11,8 @@ namespace DataAccess.Concrete
 {
     public class EfSubscribeDal : EfEntityRepositoryBase<Subscribe, CarDealershipContext>, ISubscribeDal
     {
+       
+
         public List<SubscribeDetailDto> GetClaims()
         {
             using (var contex = new CarDealershipContext())
@@ -28,5 +31,6 @@ namespace DataAccess.Concrete
                 return result.ToList();
             }
         }
+       
     }
 }

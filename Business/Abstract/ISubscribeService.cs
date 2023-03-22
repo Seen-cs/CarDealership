@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -13,5 +14,6 @@ namespace Business.Abstract
         IResult Update(Subscribe subscribe);
         IDataResult<List<Subscribe>> GetAll();
         IDataResult<List<SubscribeDetailDto>> GetClaims();
+        IDataResult<List<User>> GetAllSubUserBySupUserId(int supUserId); 
     }
 }

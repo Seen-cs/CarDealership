@@ -1,5 +1,6 @@
 ﻿
 using Business.Abstract;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -13,9 +14,11 @@ namespace Business.Concrete
     public class SubscribeManager:ISubscribeService
     {
         ISubscribeDal _subscribeDal;
-        public SubscribeManager(ISubscribeDal subscribeDal)
+        IUserService _userService;
+        public SubscribeManager(ISubscribeDal subscribeDal, IUserService userService)
         {
             _subscribeDal = subscribeDal;
+            _userService = userService;
         }
 
         public IResult Add(Subscribe subscribe)
@@ -38,6 +41,20 @@ namespace Business.Concrete
         {
             _subscribeDal.Update(subscribe);
             return new SuccessResult();
+        }
+
+
+        public IDataResult<List<User>> GetAllSubUserBySupUserId(int supUserId)
+        {
+            List<User> result = new List<User>();
+            if (_subscribeDal.GetAll(s => s.SupUserId == supUserId).Count > 0)
+            {
+                foreach (var sub in _subscribeDal.GetAll(s => s.SupUserId == supUserId))
+                {
+                    result.Add(_userService.GetById(sub.SubUserId).Data);
+                }
+            }
+            return new SuccessDataResult<List<User>>(result);
         }
     }
 }
