@@ -37,6 +37,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ModelManager>().As<IModelService>().SingleInstance();
             builder.RegisterType<EfModelDal>().As<IModelDal>().SingleInstance();
 
+            builder.RegisterType<UserOperationClaimsManager>().As<IUserOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfUserOperationClaimsDal>().As<IUserOperationClaimsDal>().SingleInstance();
+
+            builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>().SingleInstance();
+            builder.RegisterType<EfOperationClaimsDal>().As<IOperationClaimsDal>().SingleInstance();
+
             //builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             //builder.RegisterType<EFCategoryDal>().As<ICategoryDal>().SingleInstance();
 

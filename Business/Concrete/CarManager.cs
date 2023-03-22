@@ -24,13 +24,13 @@ namespace Business.Concrete
             _subscribeService = subscribeService;
             _userService = userService;
         }
-        [SecuredOperation("admin")]
+       // [SecuredOperation("admin")]
         
         public IResult Add(Car car)
         {
 
             _carDal.Add(car);
-            //SendMail(car);
+            SendMail(car);
 
             return new SuccessResult();
         }
