@@ -56,5 +56,16 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<User>>(result);
         }
+
+        public IResult Delete(Subscribe subscribe)
+        {
+            _subscribeDal.Delete(subscribe);
+            return new SuccessResult();
+        }
+
+        public IDataResult<Subscribe> GetSubscribeBySupUserIdAndSubUserId(int supUserId, int subUserId)
+        {
+            return new SuccessDataResult<Subscribe>(_subscribeDal.Get(s => s.SubUserId == subUserId && s.SupUserId == supUserId));
+        }
     }
 }

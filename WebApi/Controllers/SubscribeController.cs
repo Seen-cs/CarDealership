@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
+using Entities.Concrete;
 
 namespace WebApi.Controllers
 {
@@ -32,6 +33,8 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
+
+        //giriş yapmış kullanıcının abone olan userları döndürür
         [HttpGet("getallsubuser")]
         public IActionResult GetAllSubUser()
         {
@@ -43,6 +46,39 @@ namespace WebApi.Controllers
             }
             return BadRequest(result);
         }
-        //giriş yapmış kullanıcının abone olan userları döndürür
+
+        //abone olmayı sağlar
+        [HttpPost("subscribe")]
+        public IActionResult Subscribe(int supUserId)
+        {
+            var subUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Subscribe subscribe = new Subscribe
+            {
+                SubUserId = Convert.ToInt16(subUserId),
+                SupUserId = supUserId
+            };
+            
+            var result = _subscribeService.Add(subscribe);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        //aboneliğini silmeyi sağlar
+        [HttpPost("deletesubscribe")]
+        public IActionResult DeleteSubscribe(int supUserId)
+        {
+            var subUserId = Convert.ToInt16(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var deletedsub= _subscribeService.GetSubscribeBySupUserIdAndSubUserId(supUserId, subUserId).Data;
+
+            var result = _subscribeService.Delete(deletedsub);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }
