@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI
+namespace WebApi
 {
     public class Startup
     {
@@ -77,7 +77,7 @@ namespace WebAPI
             }
             app.ConfigureCustomExceptionMiddleware();
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "http://localhost:44314").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200", "http://localhost:44314","http://localhost:3000").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
