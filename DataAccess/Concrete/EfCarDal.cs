@@ -29,9 +29,9 @@ namespace DataAccess.Concrete
                             select new CarDetailDto
                             {
                                 CarId = car.Id,
-                                Color = color.Name,
-                                Brand=brand.Name,
-                                Model=model.Name,
+                                ColorId = color.Id,
+                                BrandId=brand.Id,   
+                                ModelId=model.Id,
                                 Km=car.Km,
                                 Price=car.Price,
                                 Year=car.Year,

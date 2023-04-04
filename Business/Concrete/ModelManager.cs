@@ -27,9 +27,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Model>>(_modelDal.GetAll());
         }
 
-        public int GetModelById(string modelName)
+        public IDataResult<Model> GetModelById(int modelId)
         {
-            return _modelDal.Get(p => p.Name == modelName).Id;
+            return new SuccessDataResult<Model>(_modelDal.Get(m => m.Id == modelId));
         }
 
         public IResult Update(Model model)

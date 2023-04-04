@@ -45,17 +45,14 @@ namespace WebApi.Controllers
         [HttpPost("add")]
         public IActionResult Add(CarDetailDto carDetailDto)
         {
-            var brand = _brandService.GetBrandById(carDetailDto.Brand);
-            var modelId = _modelService.GetModelById(carDetailDto.Model);
-            var colorId = _colorService.GetColorById(carDetailDto.Color);
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Car car = new Car
             {
-                BrandId=brand,
-                ColorId=colorId,
+                BrandId= carDetailDto.BrandId,
+                ColorId=carDetailDto.ColorId,
                 Description=carDetailDto.Description,
                 Km=carDetailDto.Km,
-                ModelId=modelId,
+                ModelId=carDetailDto.ModelId,
                 Price=carDetailDto.Price,
                 UserId=Convert.ToInt16(userId),
                 Year=carDetailDto.Year

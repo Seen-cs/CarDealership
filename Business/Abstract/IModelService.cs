@@ -10,7 +10,7 @@ namespace Business.Abstract
     {
         IResult Add(Model model);
         IResult Update(Model model);
-        int GetModelById(string modelName);
+        IDataResult<Model> GetModelById(int modelId);
         IDataResult<List<Model>> GetAll();
 
 

@@ -26,7 +26,7 @@ namespace Business.Concrete
             _userService = userService;
         }
         
-        [SecuredOperation("Seller")]
+       // [SecuredOperation("Seller")]
         public IResult Add(Car car)
         {
 
