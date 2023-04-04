@@ -22,6 +22,11 @@ namespace Business.Concrete
 
         }
 
+        public IDataResult<List<Model>> GetAll()
+        {
+            return new SuccessDataResult<List<Model>>(_modelDal.GetAll());
+        }
+
         public int GetModelById(string modelName)
         {
             return _modelDal.Get(p => p.Name == modelName).Id;
