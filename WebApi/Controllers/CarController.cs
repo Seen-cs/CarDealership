@@ -21,13 +21,15 @@ namespace WebApi.Controllers
         IBrandService _brandService;
         IColorService _colorService;
         IModelService _modelService;
+        IUserService _userService;
         private IHttpContextAccessor _httpContextAccessor;
-        public CarController(ICarService carService, IBrandService brandService,IColorService colorService,IModelService modelService)
+        public CarController(IUserService userService,ICarService carService, IBrandService brandService,IColorService colorService,IModelService modelService)
         {
             _carService = carService;
             _brandService = brandService;
             _colorService = colorService;
             _modelService = modelService;
+            _userService = userService;
    
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
@@ -38,6 +40,23 @@ namespace WebApi.Controllers
             if (result.Success)
             {
                 return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("getbyuserid")]
+        public IActionResult GetByUserId(int carId)
+        {
+            var result = _carService.GetById(carId);
+            var userName = _userService.GetById(result.Data.UserId).Data.FirstName;
+            CarOwnerUserDto carOwnerUserDto = new CarOwnerUserDto
+            {
+                UserId =result.Data.UserId,
+                UserName=userName
+            };
+            if (result.Success)
+            {
+                return Ok(carOwnerUserDto);
             }
             return BadRequest(result);
         }

@@ -11,7 +11,7 @@ namespace DataAccess.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server =DESKTOP-TOT4JFM; Database = CarDealershipDB; Trusted_Connection = true");
+            optionsBuilder.UseSqlServer(@"Server =DESKTOP-JN2GG86; Database = CarDealershipDB; Trusted_Connection = true");
         }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Color> Colors { get; set; }
