@@ -36,9 +36,14 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<List<Car>> GetAll()
+        public IDataResult<Car> Get(int carId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p=>p.Id==1));
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == carId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetAll()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetAllClaims());
         }
 
         public IDataResult<List<Car>> GetByColorId(int colorId)
@@ -46,9 +51,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p=>p.ColorId==colorId));
         }
 
-        public IDataResult<Car> GetById(int carId)
+        public IDataResult<CarDetailDto> GetById(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == carId));
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetClaims(p=>p.CarId==carId));
         }
 
         public IDataResult<List<Car>> GetByUnitePrice(decimal min, decimal max)

@@ -11,6 +11,7 @@ namespace Business.Abstract
         IResult Add(Model model);
         IResult Update(Model model);
         IDataResult<Model> GetModelById(int modelId);
+        IDataResult<Model> Get(string modelName);
         IDataResult<List<Model>> GetAll();
 
 

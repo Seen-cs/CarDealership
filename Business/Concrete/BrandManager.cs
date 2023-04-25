@@ -22,6 +22,11 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<Brand> Get(string brandName)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(p=>p.Name==brandName));
+        }
+
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());

@@ -22,6 +22,11 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IDataResult<Color> Get(string colorName)
+        {
+            return new SuccessDataResult<Color>(_colorDal.Get(p => p.Name == colorName));
+        }
+
         public IDataResult<List<Color>> GetAll()
         {
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll());

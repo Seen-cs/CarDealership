@@ -11,9 +11,10 @@ namespace Business.Abstract
     {
         IResult Add(Car car);
         IResult Update(Car car);
-        IDataResult<List<Car>> GetAll();     
+        IDataResult<Car> Get(int carId);
+        IDataResult<List<CarDetailDto>> GetAll();     
         IDataResult<List<Car>> GetByColorId(int colorId);
         IDataResult<List<Car>> GetByUnitePrice(decimal min, decimal max);
-        IDataResult<Car> GetById(int carId);
+        IDataResult<CarDetailDto> GetById(int carId);
     }
 }
