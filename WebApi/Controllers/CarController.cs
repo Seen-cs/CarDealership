@@ -44,7 +44,7 @@ namespace WebApi.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("getbyuserid")]
+        [HttpGet("getbyuserid")]
         public IActionResult GetByUserId(int carId)
         {
             var result = _carService.GetById(carId);
@@ -53,14 +53,16 @@ namespace WebApi.Controllers
             var brand = result.Data.Brand;
             var color = result.Data.Color;
             var userId = _carService.Get(carId).Data.UserId;
-            
+            var userMail = _userService.GetById(userId).Data.Email;
+
             CarOwnerUserDto carOwnerUserDto = new CarOwnerUserDto
             {
-                UserName=userName,
-                Brand=brand,
-                Model=model,
-                Color=color,
-                UserId=userId
+                UserName = userName,
+                Brand = brand,
+                Model = model,
+                Color = color,
+                UserId = userId,
+                UserMail = userMail
             };
             if (result.Success)
             {
